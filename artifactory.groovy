@@ -30,6 +30,7 @@ try {
       echo "********** Verify the Variables ***********"
       echo "*******************************************"
 
+      echo "presnt = ${PWD}"
       echo "Artifact Name = ${env.Artifact_Name}"
       echo "Target Path = ${targetDir}"
       echo "Artifactory URL = ${artifactoryUrl}"
