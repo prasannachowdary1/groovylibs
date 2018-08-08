@@ -12,7 +12,7 @@ try {
     
     env.artifactoryUrl = "http://54.218.44.118:8081/artifactory/"
 
-     def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-creds' )
+     def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-cred' )
 
      def artifactUploadSpec = """
      {
@@ -50,9 +50,9 @@ try {
       echo "@@@@@@@@@@ Artifact Download From Artifactory @@@@@@@@@@@"
       echo "===================================================="
     
-    env.artifactoryUrl = "https://artifactory.aws.foxinc.com/artifactory/"
+    env.artifactoryUrl = "http://54.218.44.118:8081/artifactory/"
 
-     def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-creds' )
+     def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-cred' )
 
      artifactoryServer.setBypassProxy(true)
 
