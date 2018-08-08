@@ -11,6 +11,8 @@ try {
       echo "===================================================="
     
     env.artifactoryUrl = "http://54.218.44.118:8081/artifactory/"
+            echo "presnt = ${PWD}"
+
 
      def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-cred' )
 
@@ -30,7 +32,6 @@ try {
       echo "********** Verify the Variables ***********"
       echo "*******************************************"
 
-      echo "presnt = ${PWD}"
       echo "Artifact Name = ${env.Artifact_Name}"
       echo "Target Path = ${targetDir}"
       echo "Artifactory URL = ${artifactoryUrl}"
