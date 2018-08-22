@@ -15,7 +15,7 @@ try {
     } else {
       env.artifactName = "${env.PROJECT_NAME}-${env.BUILD_NUMBER}.${ARCHIVE_TYPE}"
     }
-    env.artifactoryUrl = "http://54.218.44.118:8081/artifactory/"
+    env.artifactoryUrl = "http://34.213.56.10:8081/artifactory/"
 
      def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-cred' )
 
@@ -62,7 +62,7 @@ try {
       env.artifactName = "${env.PROJECT_NAME}-${env.BUILD_NUMBER}.${ARCHIVE_TYPE}"
     }
 
-    env.artifactoryUrl = "http://54.218.44.118:8081/artifactory/"
+    env.artifactoryUrl = "http://34.213.56.10:8081/artifactory/"
 
      def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-cred' )
 
