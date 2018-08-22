@@ -10,18 +10,23 @@ try {
       echo "@@@@@@@@@@ Artifact Upload to Artifactory @@@@@@@@@@@"
       echo "===================================================="
     
+    if (env.ENVIRONMENT) {
+      env.artifactName = "${env.PROJECT_NAME}-${env.ENVIRONMENT}-${env.BUILD_NUMBER}.${ARCHIVE_TYPE}"
+    } else {
+      env.artifactName = "${env.PROJECT_NAME}-${env.BUILD_NUMBER}.${ARCHIVE_TYPE}"
+    }
     env.artifactoryUrl = "http://54.218.44.118:8081/artifactory/"
-            echo "presnt = ${PWD}"
-
 
      def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-cred' )
+
+     artifactoryServer.setBypassProxy(true)
 
      def artifactUploadSpec = """
      {
        "files": [
         {
           "pattern": "*.${Archive_Type}",
-          "target": "${env.targetDir}"
+          "target": "${env.targetDir}/${env.artifactName}"
         }
       ]
     }
@@ -32,7 +37,6 @@ try {
       echo "********** Verify the Variables ***********"
       echo "*******************************************"
 
-      echo "Artifact Name = ${env.Artifact_Name}"
       echo "Target Path = ${targetDir}"
       echo "Artifactory URL = ${artifactoryUrl}"
       echo "Upload Spec File = ${artifactUploadSpec}"
@@ -52,6 +56,12 @@ try {
       echo "@@@@@@@@@@ Artifact Download From Artifactory @@@@@@@@@@@"
       echo "===================================================="
     
+    if (env.ENVIRONMENT) {
+      env.artifactName = "${env.PROJECT_NAME}-${env.ENVIRONMENT}-${env.BUILD_NUMBER}.${ARCHIVE_TYPE}"
+    } else {
+      env.artifactName = "${env.PROJECT_NAME}-${env.BUILD_NUMBER}.${ARCHIVE_TYPE}"
+    }
+
     env.artifactoryUrl = "http://54.218.44.118:8081/artifactory/"
 
      def artifactoryServer = Artifactory.newServer( url: "${artifactoryUrl}", credentialsId: 'jenkins-artifactory-cred' )
@@ -62,8 +72,8 @@ try {
      {
        "files": [
         {
-          "pattern": "${env.targetDir}/${env.Artifact_Name}",
-          "target": "${PWD}"
+          "pattern": "${env.targetDir}/${env.artifactName}",
+          "target": "${env.local_target}"
         }
       ]
     }
@@ -71,10 +81,9 @@ try {
      """
 
       echo "*******************************************"
-      echo "********** Verify the Variables ***********"
+      echo "********** Verify Variables ***********"
       echo "*******************************************"
 
-      echo "Artifact Name = ${env.Artifact_Name}"
       echo "Target Path = ${targetDir}"
       echo "Artifactory URL = ${artifactoryUrl}"
       echo "Upload Spec File = ${downloadSpec}"
